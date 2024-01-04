@@ -1,0 +1,42 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class MessageScrambler {
+
+    public static String scrambleMessage(String message) {
+        char[] messageChars = message.toCharArray();
+        Random random = new Random();
+
+        for (int i = 0; i < messageChars.length; i++) {
+            int randomIndex = random.nextInt(messageChars.length);
+
+            // Swap characters at current index and random index
+            char temp = messageChars[i];
+            messageChars[i] = messageChars[randomIndex];
+            messageChars[randomIndex] = temp;
+        }
+
+        return new String(messageChars);
+    }
+
+    public static String unscrambleMessage(String scrambledMessage) {
+        // Reversing the scrambling process (same logic)
+        return scrambleMessage(scrambledMessage);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your message: ");
+        String originalMessage = scanner.nextLine();
+        scanner.close();
+
+        // Scramble the message
+        String scrambledMessage = scrambleMessage(originalMessage);
+        System.out.println("Scrambled Message: " + scrambledMessage);
+
+        // Unscramble the message
+        String unscrambledMessage = unscrambleMessage(scrambledMessage);
+        System.out.println("Unscrambled Message: " + unscrambledMessage);
+    }
+}
